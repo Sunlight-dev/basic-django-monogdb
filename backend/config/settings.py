@@ -9,33 +9,26 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 import mongoengine
 
-mongoengine.connect(
-    db='dynamic_form',
-    host='localhost',
-    port=27017
-)
+load_dotenv()
+
+DEBUG = os.getenv('DEBUG') == 'True'
+SECRET_KEY = os.getenv('SECRET_KEY')
+ALLOWED_HOSTS = ['*']  # Replace with specific domain in production
+
+# MongoDB connection
+MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
+MONGO_URL = os.getenv("MONGO_URL")
+
+mongoengine.connect(MONGO_DB_NAME, host=MONGO_URL, port=27017)
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*19e!*0+=7r$k=u+$wmxzxcqf+l$#6(mm_xh583rs#$hn^_%49'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
