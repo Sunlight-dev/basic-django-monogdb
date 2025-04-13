@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import FormField, UserData
+from .fields import ObjectIdField
 
 class FormFieldSerializer(serializers.Serializer):
     id = serializers.CharField(read_only=True)
@@ -16,6 +17,13 @@ class FormFieldSerializer(serializers.Serializer):
 
 class UserDataSerializer(serializers.Serializer):
     data = serializers.DictField()
+    id = ObjectIdField(read_only=True)
 
     def create(self, validated_data):
         return UserData(**validated_data).save()
+
+    def update(self, instance, validated_data):
+        # Update the data field
+        instance.data = validated_data.get('data', instance.data)
+        instance.save()
+        return instance

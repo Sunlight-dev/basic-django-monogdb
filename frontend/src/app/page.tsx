@@ -17,6 +17,7 @@ export default function Home() {
 
   useEffect(() => {
     fetch(`https://${process.env.NEXT_PUBLIC_API_URL}/api/form-fields/`)
+      // fetch("http://localhost:8000/api/form-fields/")
       .then((response) => response.json())
       .then((data) => {
         setFormFields(data);
@@ -40,6 +41,7 @@ export default function Home() {
     try {
       const response = await fetch(
         `https://${process.env.NEXT_PUBLIC_API_URL}/api/add-form-fields/`,
+        // "http://localhost:8000/api/add-form-fields/",
         {
           method: "POST",
           headers: {
@@ -75,10 +77,10 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
     try {
       const response = await fetch(
         `https://${process.env.NEXT_PUBLIC_API_URL}/api/submit-data/`,
+        // "http://localhost:8000/api/submit-data/",
         {
           method: "POST",
           headers: {
@@ -87,8 +89,15 @@ export default function Home() {
           body: JSON.stringify(formData),
         }
       );
+
       if (response.ok) {
         alert("Data submitted successfully!");
+        // Reset form data
+        const initialData: FormData = {};
+        formFields.forEach((field) => {
+          initialData[field.name] = "";
+        });
+        setFormData(initialData);
       } else {
         alert("Error submitting data");
       }
