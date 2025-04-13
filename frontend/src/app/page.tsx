@@ -16,7 +16,7 @@ export default function Home() {
   const [showAddField, setShowAddField] = useState(false);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/form-fields/`)
+    fetch(`https://${process.env.NEXT_PUBLIC_API_URL}/api/form-fields/`)
       .then((response) => response.json())
       .then((data) => {
         setFormFields(data);
@@ -39,7 +39,7 @@ export default function Home() {
   const handleAddField = async () => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/add-form-fields/`,
+        `https://${process.env.NEXT_PUBLIC_API_URL}/api/add-form-fields/`,
         {
           method: "POST",
           headers: {
@@ -78,7 +78,7 @@ export default function Home() {
     console.log(formData);
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/submit-data/`,
+        `https://${process.env.NEXT_PUBLIC_API_URL}/api/submit-data/`,
         {
           method: "POST",
           headers: {

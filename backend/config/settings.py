@@ -24,7 +24,7 @@ ALLOWED_HOSTS = ['*']  # Replace with specific domain in production
 MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
 MONGO_URL = os.getenv("MONGO_URL")
 
-mongoengine.connect(MONGO_DB_NAME, host=MONGO_URL, port=27017)
+mongoengine.connect(MONGO_DB_NAME, host=MONGO_URL)
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
