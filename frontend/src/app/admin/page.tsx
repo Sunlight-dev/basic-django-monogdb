@@ -141,7 +141,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="p-4 text-black bg-black">
+    <div className="p-4 text-black bg-black w-full h-full">
       <h1 className="text-2xl font-bold mb-4 text-white">Form Submissions</h1>
       {formData.length === 0 ? (
         <p>No form submissions found</p>
